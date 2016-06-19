@@ -1,10 +1,9 @@
 import React from 'react'
-import classes from './Counter.scss'
 
-export const Counter = (props) => (
+export const UserList = (props) => (
   <div>
     <h2 className={classes.counterContainer}>
-      Counter:
+      UserList:
       {' '}
       <span className={classes['counter--green']}>
         {props.counter}
@@ -20,10 +19,9 @@ export const Counter = (props) => (
   </div>
 )
 
-Counter.propTypes = {
-  counter: React.PropTypes.number.isRequired,
-  doubleAsync: React.PropTypes.func.isRequired,
-  increment: React.PropTypes.func.isRequired
+UserList.propTypes = {
+  userList: React.PropTypes.number.isRequired,
+  setUserPassword: React.PropTypes.func.isRequired
 }
 
-export default Counter
+export default UserList
