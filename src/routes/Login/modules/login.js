@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -83,6 +85,7 @@ export function loginUser(id, password) {
           // Dispatch the success action
           console.log(JSON.stringify(data));
           dispatch(loginSuccess(data.userKey));
+          dispatch(push('/'));
         } else {
           // If there was a problem, we want to
           // dispatch the error condition

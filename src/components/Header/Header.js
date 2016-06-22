@@ -45,8 +45,7 @@ const mapActionCreators = {
 }
 
 const mapStateToProps = (state) => ({
-  isAuthenticated:(state && state.login && state.login.userKey)?true:false,
-  state: state
+  isAuthenticated:(state && state.login && state.login.userKey)?true:false
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
