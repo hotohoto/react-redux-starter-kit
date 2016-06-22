@@ -3,8 +3,6 @@ import React, { Component, PropTypes } from 'react'
 export default class Login extends Component {
 
   render() {
-    const { errorMessage } = this.props
-
     return (
       <div>
         <input type='text' ref='id' className="form-control" placeholder='Id'/>
@@ -12,10 +10,6 @@ export default class Login extends Component {
         <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
           Login
         </button>
-
-        {errorMessage &&
-          <p>{errorMessage}</p>
-        }
       </div>
     )
   }
@@ -28,6 +22,5 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  onLoginClick: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string
+  onLoginClick: PropTypes.func.isRequired
 }

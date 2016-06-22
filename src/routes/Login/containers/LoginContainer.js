@@ -18,9 +18,7 @@ const mapActionCreators = {
   loginFailure: loginFailure
 }
 
-const mapStateToProps = (state) => ({
-  errorMessage:state.errorMessage
-})
+const mapStateToProps = (state) => ({})
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
 

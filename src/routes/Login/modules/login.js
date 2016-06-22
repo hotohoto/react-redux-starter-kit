@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux'
+import {toastr} from 'react-redux-toastr'
 
 // ------------------------------------
 // Constants
@@ -85,11 +86,13 @@ export function loginUser(id, password) {
           // Dispatch the success action
           console.log(JSON.stringify(data));
           dispatch(loginSuccess(data.userKey));
+          toastr.success('Welcome.', "You're successfully logged in.");
           dispatch(push('/'));
         } else {
           // If there was a problem, we want to
           // dispatch the error condition
           dispatch(loginFailure());
+          toastr.error('Login failed.', 'Your id or password does not match. Please, try it again.');
         }
     }).error((err)=> {
       console.log("Error: ", err);
