@@ -5,7 +5,7 @@ import co from 'co';
 
 export default class Users {};
 
-var db = monk('localhost/mini_project');
+var db = monk('dev:1234@ds021694.mlab.com:21694/mini_project');
 var users = wrap(db.get('users'));
 
 co(function * () {
