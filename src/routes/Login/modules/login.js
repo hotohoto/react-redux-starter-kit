@@ -5,7 +5,6 @@ import {toastr} from 'react-redux-toastr'
 // Constants
 // ------------------------------------
 export const LOGIN_START = 'LOGIN_START'
-export const LOGIN_PROCESS = 'LOGIN_PROCESS'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const LOGOUT = 'LOGOUT'
@@ -71,7 +70,7 @@ export default function loginReducer (state = initialState, action) {
 // Middleware Action Creators
 // ------------------------------------
 
-export function loginUser(id, password) {
+export function doLogin(id, password) {
   return dispatch => {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(loginStart(id, password))
@@ -84,7 +83,6 @@ export function loginUser(id, password) {
     }).done(data => {
         if (data.result === 'success') {
           // Dispatch the success action
-          console.log(JSON.stringify(data));
           dispatch(loginSuccess(data.userKey));
           toastr.success('Welcome.', "You're successfully logged in.");
           dispatch(push('/'));

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { addUser } from '../modules/signup'
+import { doAddUser } from '../modules/signup'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -13,13 +13,10 @@ import Signup from '../components/Signup'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapActionCreators = {
-  addUser: addUser
+  onSignUpClick: doAddUser
 }
 
-const mapStateToProps = (state) => ({
-  errorMessage: state.errorMessage,
-  onSignUpClick: () => ({})
-})
+const mapStateToProps = (state) => ({})
 
 
 

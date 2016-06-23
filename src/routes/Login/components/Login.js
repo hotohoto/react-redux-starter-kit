@@ -5,11 +5,19 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <input type='text' ref='id' className="form-control" placeholder='Id'/>
-        <input type='password' ref='password' className="form-control" placeholder='Password'/>
-        <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
-          Login
-        </button>
+        <div className="form-group">
+          <label htmlFor="id">Id:</label>
+          <input id="id" type='text' ref='id' className="form-control" placeholder='Enter Id'/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input id="password" type='password' ref='password' className="form-control" placeholder='Enter password'/>
+        </div>
+        <div className="form-group text-center">
+          <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
+            Login
+          </button>
+        </div>
       </div>
     )
   }
