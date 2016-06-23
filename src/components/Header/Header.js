@@ -30,7 +30,6 @@ class Header extends React.Component {
   }
   
   handleLogoutClick(event) {
-    event.preventDefault();
     this.props.logout();
   } 
 }
