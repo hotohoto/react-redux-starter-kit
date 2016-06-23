@@ -1,67 +1,82 @@
+import { push } from 'react-router-redux'
+import {toastr} from 'react-redux-toastr'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const ADD_USER = 'ADD_USER'
-export const SET_USER_PASSWORD = 'SET_USER_PASSWORD'
+export const GET_USER_LIST_SUCCESS = 'GET_USER_LIST_SUCCESS'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function addUser (id, password, name, email) {
+export function getUserListSuccess (userList) {
   return {
-    type: ADD_USER,
-    id: id,
-    password: password,
-    name: name,
-    email: email
+    type: GET_USER_LIST_SUCCESS,
+    userList
   }
 }
-
-export function setUserPassword (id, password) {
-  return {
-    type: SET_USER_PASSWORD,
-    id: id,
-    password: password
-  }
-}
-
-
 
 export const actions = {
-  addUser,
-  setUserPassword
+  getUserListSuccess,
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ADD_USER]: (state, action) => {
-    newUserList = [];
-    state.userList.forEach((u) => {
-      newUserList.push({
-        id: u.id,
-        password: u.password,
-        name: u.name,
-        email: u.email
-      });
-    })
-    newUserList.push({
-        id: action.id,
-        password: action.password,
-        name: action.name,
-        email: action.email
-    });
-    return {userList: newUserList};
-  }
+  [GET_USER_LIST_SUCCESS]: (state, action) => (Object.assign({},state,{userList:action.userList}))
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {userList:[]} //user list
+const initialState = {} //user list
 export default function userListReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
+}
+
+
+// ------------------------------------
+// Middleware Action Creators
+// ------------------------------------
+export function doGetUserList(userKey) {
+  return dispatch => {
+    if (userKey) {
+      $.ajax({
+        method: "post",
+        url: 'http://' + location.hostname + ':4000/api/user',
+        data: {userKey:userKey},
+        dataType: "json"
+      }).done(data => {
+        // Dispatch the success action
+        dispatch(getUserListSuccess(data));
+      }).error((err)=> {
+        console.log("Error: ", err);
+      });
+    } else {
+      dispatch(push('/login'));
+    }
+  }
+}
+
+export function doSetUserPassword(userKey, id, password) {
+  return dispatch => {
+    $.ajax({
+      method: "post",
+      url: 'http://' + location.hostname + ':4000/api/user/setPassword',
+      data: {userKey:userKey, id: id, password: password},
+      dataType: "json"
+    }).done(data => {
+      if (data.result === "success") {
+        toastr.success('Succeeded.', "The password has been changed successfully.");
+      } else {
+        toastr.error('Failed.', "The password has not been changed.");
+      }
+        
+    }).error((err)=> {
+      console.log("Error: ", err);
+    });
+  }
 }

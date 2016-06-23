@@ -50,9 +50,9 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [LOGIN_START]: (state, action) => (Object.assign({},state,{isInProgress:true, errorMessage: null})),
+  [LOGIN_START]: (state, action) => (Object.assign({},state,{isInProgress:true})),
   [LOGIN_SUCCESS]: (state, action) => (Object.assign({},state,{isInProgress:false, userKey:action.userKey})),
-  [LOGIN_FAILURE]: (state, action) => (Object.assign({},state,{isInProgress:false, errorMessage:"Your id or password does NOT match."})),
+  [LOGIN_FAILURE]: (state, action) => (Object.assign({},state,{isInProgress:false})),
   [LOGOUT]: (state, action) => (Object.assign({},state,{userKey:null}))
 }
 
@@ -72,7 +72,6 @@ export default function loginReducer (state = initialState, action) {
 
 export function doLogin(id, password) {
   return dispatch => {
-    // We dispatch requestLogin to kickoff the call to the API
     dispatch(loginStart(id, password))
 
     $.ajax({

@@ -5,6 +5,7 @@ export default class Signup extends Component {
   render() {
     return (
       <div>
+        <h2>Sign up</h2>
         <div className="form-group">
           <label htmlFor="id">Id:</label>
           <input type='text' ref='id' className="form-control" placeholder='Enter id'/>
@@ -22,7 +23,7 @@ export default class Signup extends Component {
           <input type='email' ref='email' className="form-control" placeholder='Enter email address'/>
         </div>
         <div className="form-group">
-          <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
+          <button onClick={(event) => this.handleSignupClick(event)} className="btn btn-primary">
             Sign up
           </button>
         </div>
@@ -30,7 +31,7 @@ export default class Signup extends Component {
     )
   }
 
-  handleClick(event) {
+  handleSignupClick(event) {
     const id = this.refs.id.value.trim();
     const password = this.refs.password.value.trim();
     const name = this.refs.name.value.trim();
