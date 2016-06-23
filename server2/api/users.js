@@ -25,7 +25,7 @@ Users.login = function * login(next) {
   //validate parameters
   if (!data.id || !data.password) {
     this.body = {
-      result:'failed'
+      result:'fail'
     };   
     return;
   }
@@ -39,13 +39,14 @@ Users.login = function * login(next) {
     };
   } else {
     this.body = {
-      result:'failed'
+      result:'fail'
     };
   }
 };
 
 
 Users.addUser = function * addUser(next) {
+
   let user = yield parse(this, {
     limit: '1kb'
   });
@@ -53,7 +54,7 @@ Users.addUser = function * addUser(next) {
   //validate parameters
   if (!user || !user.id || !user.password || !user.name || !user.email) {
     this.body = {
-      result:'failed'
+      result:'fail'
     };   
     return;
   }
@@ -62,7 +63,7 @@ Users.addUser = function * addUser(next) {
   let oldUser = yield users.find({id:user.id});
   if (oldUser.length) {
     this.body = {
-      result:'failed'
+      result:'duplicate_id'
     };   
     return;
   }
@@ -87,7 +88,7 @@ Users.list = function * list(next) {
   
   //check login status
   
-  var userList = yield users.find({});
+  var userList = yield users.find({},"-_id -password"); //exclude _id and password from the data transfered to the client.
   this.body = userList;
 };
 
@@ -101,7 +102,7 @@ Users.setUserPassword = function * setUserPassword(next) {
   //validate parameter
   if (!data.id || !data.password) {
     this.body = {
-      result:'failed'
+      result:'fail'
     };
     return;
   }
@@ -110,7 +111,7 @@ Users.setUserPassword = function * setUserPassword(next) {
 
   if (user.length === 0) {
     this.body = {
-      result:'failed'
+      result:'fail'
     };
     return;
   }
@@ -121,7 +122,7 @@ Users.setUserPassword = function * setUserPassword(next) {
 
   if (!updated) {
     this.body = {
-      result:'failed'
+      result:'fail'
     };
     return;
   }
