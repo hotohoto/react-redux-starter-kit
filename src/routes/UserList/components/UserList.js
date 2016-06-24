@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 export default class UserList extends Component {
   componentDidMount () {
-    this.props.getUserList(this.props.userKey);
+    this.props.getUserList();
   }
   render() {
     let _this =this;
@@ -30,7 +30,7 @@ export default class UserList extends Component {
             
             this.props.userList && this.props.userList.map(function(user) {
               return (
-                <tr>
+                <tr key={user.id}>
                   <td>{user.id}</td>
                   <td><input type="password" ref={'password_'+user.id}/> <button onClick={(event) => _this.handlePasswordChangeClick(event,user.id)} type="button" className="btn btn-primary">change</button></td>
                   <td>{user.name}</td>
@@ -48,13 +48,12 @@ export default class UserList extends Component {
   }
   handlePasswordChangeClick(event, userId) {
     const newPassword = this.refs["password_" + userId].value;
-    this.props.setUserPassword(this.props.userKey, userId, newPassword);
+    this.props.setUserPassword(userId, newPassword);
   }
 }
 
 UserList.propTypes = {
-  userKey: PropTypes.string.isRequired,
-  userList: PropTypes.number.isRequired,
+  userList: PropTypes.array,
   getUserList: PropTypes.func.isRequired,
   setUserPassword: PropTypes.func.isRequired
 }

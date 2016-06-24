@@ -30,7 +30,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {} //user list
+const initialState = {}
 export default function userListReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
@@ -41,8 +41,9 @@ export default function userListReducer (state = initialState, action) {
 // ------------------------------------
 // Middleware Action Creators
 // ------------------------------------
-export function doGetUserList(userKey) {
+export function doGetUserList() {
   return dispatch => {
+    const userKey = localStorage.getItem('userKey');
     if (userKey) {
       $.ajax({
         method: "post",
@@ -61,8 +62,9 @@ export function doGetUserList(userKey) {
   }
 }
 
-export function doSetUserPassword(userKey, id, password) {
+export function doSetUserPassword(id, password) {
   return dispatch => {
+    const userKey = localStorage.getItem('userKey');
     $.ajax({
       method: "post",
       url: 'http://' + location.hostname + ':4000/api/user/setPassword',

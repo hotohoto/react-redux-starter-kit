@@ -3,9 +3,10 @@ import { IndexLink, Link } from 'react-router'
 import ListItemLink from './ListItemLink'
 
 import { connect } from 'react-redux'
-import { loginSuccess, logout } from 'routes/Login/modules/login'
+import { loginSuccess, doLogout } from 'routes/Login/modules/login'
 
 class Header extends React.Component {
+
   render () {
     var isAuthenticated = this.props.isAuthenticated;
     var logout = this.props.logout;
@@ -40,11 +41,11 @@ Header.propTypes = {
 }
 
 const mapActionCreators = {
-  logout: logout
+  logout: doLogout
 }
 
 const mapStateToProps = (state) => ({
-  isAuthenticated:(state && state.login && state.login.userKey)?true:false
+  isAuthenticated:(localStorage.getItem('userKey'))?true:false
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

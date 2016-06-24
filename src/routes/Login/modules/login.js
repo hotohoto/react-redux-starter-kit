@@ -20,10 +20,9 @@ export function loginStart (id, password) {
   }
 }
 
-export function loginSuccess (userKey) {
+export function loginSuccess () {
   return {
-    type: LOGIN_SUCCESS,
-    userKey: userKey
+    type: LOGIN_SUCCESS
   }
 }
 
@@ -51,7 +50,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [LOGIN_START]: (state, action) => (Object.assign({},state,{isInProgress:true})),
-  [LOGIN_SUCCESS]: (state, action) => (Object.assign({},state,{isInProgress:false, userKey:action.userKey})),
+  [LOGIN_SUCCESS]: (state, action) => (Object.assign({},state,{isInProgress:false})),
   [LOGIN_FAILURE]: (state, action) => (Object.assign({},state,{isInProgress:false})),
   [LOGOUT]: (state, action) => (Object.assign({},state,{userKey:null}))
 }
@@ -82,7 +81,8 @@ export function doLogin(id, password) {
     }).done(data => {
         if (data.result === 'success') {
           // Dispatch the success action
-          dispatch(loginSuccess(data.userKey));
+          dispatch(loginSuccess());
+          localStorage.setItem('userKey', data.userKey);
           toastr.success('Welcome.', "You're successfully logged in.");
           dispatch(push('/'));
         } else {
@@ -94,5 +94,12 @@ export function doLogin(id, password) {
     }).error((err)=> {
       console.log("Error: ", err);
     });
+  }
+}
+
+export function doLogout() {
+  return dispatch => {
+    localStorage.removeItem('userKey');
+    dispatch(logout());
   }
 }
