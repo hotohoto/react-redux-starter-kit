@@ -13,7 +13,7 @@ const port = config.server_port
 const port2 = config.server_port2
 const host = config.server_host
 
-app.use(cors({origin:`http://${host}:${port}`}));
+app.use(cors({origin:true}));
 app.use(route.get('/api/test',Users.test));
 app.use(route.post('/api/user/add',Users.addUser));
 app.use(route.post('/api/login',Users.login));
