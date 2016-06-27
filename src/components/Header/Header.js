@@ -13,18 +13,16 @@ class Header extends React.Component {
     
     return (
       <nav className="navbar navbar-default">
-        <div className="container">
+        <div className="container-fluid">
           <div className="navbar-header">
             <IndexLink to='/' className="navbar-brand">Mini Project</IndexLink>
           </div>
-          <div className="navbar-collapse collapse">
-            <ul className="nav navbar-nav">
-              <ListItemLink to='/signup' activeClassName="active" index={true}>Sign up</ListItemLink>
-              {isAuthenticated && <ListItemLink to='/user' activeClassName="active">Service Management</ListItemLink>}
-              {!isAuthenticated && <ListItemLink to='/login' activeClassName="active">Login</ListItemLink>}
-              {isAuthenticated && <li><Link to='/' onClick={(event)=>this.handleLogoutClick(event)}>Logout</Link></li>}
-            </ul>
-          </div>
+          <ul className="nav navbar-nav">
+            <ListItemLink to='/signup' activeClassName="active" index={true}>Sign up</ListItemLink>
+            {isAuthenticated && <ListItemLink to='/user' activeClassName="active">Service Management</ListItemLink>}
+            {!isAuthenticated && <ListItemLink to='/login' activeClassName="active">Login</ListItemLink>}
+            {isAuthenticated && <li><Link to='/' onClick={(event)=>this.handleLogoutClick(event)}>Logout</Link></li>}
+          </ul>
         </div>
       </nav>
     )
