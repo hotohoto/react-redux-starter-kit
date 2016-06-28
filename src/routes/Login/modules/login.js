@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux'
 import {toastr} from 'react-redux-toastr'
+import $ from 'jquery'
 
 // ------------------------------------
 // Constants
@@ -91,7 +92,7 @@ export function doLogin(id, password) {
           dispatch(loginFailure());
           toastr.error('Login failed.', 'Your id or password does not match. Please, try it again.');
         }
-    }).error((err)=> {
+    }).fail((err)=> {
       console.log("Error: ", err);
     });
   }

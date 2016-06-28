@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux'
 import {toastr} from 'react-redux-toastr'
+import $ from 'jquery'
 
 // ------------------------------------
 // Constants
@@ -53,7 +54,7 @@ export function doGetUserList() {
       }).done(data => {
         // Dispatch the success action
         dispatch(getUserListSuccess(data));
-      }).error((err)=> {
+      }).fail((err)=> {
         console.log("Error: ", err);
       });
     } else {
@@ -76,7 +77,7 @@ export function doSetUserPassword(id, password) {
       } else {
         toastr.error('Failed.', "The password has not been changed.");
       }
-        
+
     }).error((err)=> {
       console.log("Error: ", err);
     });

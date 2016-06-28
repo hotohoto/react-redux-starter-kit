@@ -1,4 +1,5 @@
 import {toastr} from 'react-redux-toastr'
+import $ from 'jquery'
 
 // ------------------------------------
 // Constants
@@ -81,7 +82,7 @@ export function doAddUser(id, password, name, email) {
           } else {
             toastr.error('Failed.', 'Sorry, Please check your data and try it again.');
           }
-          
+
         }
     }).error((err)=> {
       console.log("Error: ", err);
